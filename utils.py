@@ -246,19 +246,7 @@ def list_to_str(k):
 async def get_shortlink(
     link, grp_id, is_second_shortener=False, is_third_shortener=False
 ):
-    settings = await get_settings(grp_id)
-    if is_third_shortener:
-        api, site = settings["api_three"], settings["shortner_three"]
-    else:
-        if is_second_shortener:
-            api, site = settings["api_two"], settings["shortner_two"]
-        else:
-            api, site = settings["api"], settings["shortner"]
-    shortzy = Shortzy(api, site)
-    try:
-        link = await shortzy.convert(link)
-    except Exception:
-        link = await shortzy.get_quick_link(link)
+    # ✅ Disable shortening completely — return original link
     return link
 
 
